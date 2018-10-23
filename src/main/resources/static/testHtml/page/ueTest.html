@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+    <link rel="stylesheet" href="../ueditor/themes/default/css/umeditor.css">
+</head>
+<body>
+<div id="ooo">
+    <!-- 加载编辑器的容器 -->
+    <script id="contentInfo" name="contentInfo" type="text/plain" style="width: 700px">这里写你的初始化内容</script>
+</div>
+<button id="search">提交</button>
+<!--<form action="http://localhost:8081/uploadVideo" enctype="multipart/form-data" method="POST"  >
+    <input type="file" class="file-input" name="upvideo" id="umv">
+    <button type="submit" style="display: none">表单内提交</button>
+</form>-->
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="../ueditor/third-party/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.2.2/dist/jquery.form.min.js"
+        integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+        crossorigin="anonymous"></script>
+<!-- <script type="text/javascript" src="../ueditor/third-party/template.min.js"></script> -->
+<script type="text/javascript" src="../ueditor/umeditor.config.js" charset="utf-8"></script>
+<script type="text/javascript" src="../ueditor/umeditor.js" charset="utf-8"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var um = UM.getEditor('contentInfo');
+
+    $("#ooo").on('change', "#umeditorUploadId", function () {
+        $('#umeditorUploadId').parent()
+            .attr("enctype", "multipart/form-data")
+            .attr("method", "POST")
+            .attr("action", window.location.protocol + "//" + window.location.host+"/uploadVideo");
+
+        $('#umeditorUploadId').parent().ajaxSubmit({
+            success: function(data) {
+                console.log(data);
+                $('#eduiVideoUrl').val(data);
+                $("#eduiVideoUrl").trigger('change');
+            }
+        });
+    });
+    $("#search").click(function () {
+        var contentInfo = UM.getEditor('contentInfo').getContent();
+        console.log(JSON.stringify(contentInfo));
+        localStorage.setItem("htmlE", contentInfo);
+        location.href = 'ueTestBack.html';
+    });
+
+</script>
+
+</body>
+</html>

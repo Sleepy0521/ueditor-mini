@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>ueditor demo</title>
+	<link rel="stylesheet" href="../ueditor/themes/default/css/umeditor.css">
+</head>
+<body>
+    <div id="ooo">
+	<!-- 加载编辑器的容器 -->
+		<script id="contentInfo" name="contentInfo" type="text/plain" style="width: 700px">这里写你的初始化内容</script>
+	</div>
+	
+	<hr>
+	<!--<div id="huixian">
+	</div>-->
+	
+	<!--<button id="search"  >提交</button>-->
+	<button id="xxx"  >回显</button>
+	<!-- 配置文件 -->
+	<script type="text/javascript" src="../ueditor/third-party/jquery.min.js"></script>
+    <script type="text/javascript" src="../ueditor/umeditor.config.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../ueditor/umeditor.js" charset="utf-8"></script>
+	<!-- 实例化编辑器 -->
+	<script type="text/javascript">
+	   var um = UM.getEditor('contentInfo');
+	   htmlContent = localStorage.getItem("htmlE");
+	   console.log(htmlContent);
+
+	   $("#xxx").click(function () {
+
+           UM.getEditor('contentInfo').setContent(htmlContent);
+	   });
+	    
+	</script>
+	
+</body>
+</html>
